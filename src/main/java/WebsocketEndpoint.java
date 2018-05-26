@@ -15,8 +15,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class WebsocketEndpoint{
 
     private Session session;
-    private static Set<WebsocketEndpoint> chatEndpoints = new CopyOnWriteArraySet<WebsocketEndpoint>();
-    private static HashMap<String, String> users = new HashMap<String, String>();
+    private static Set<WebsocketEndpoint> chatEndpoints = new CopyOnWriteArraySet<>();
+    private static HashMap<String, String> users = new HashMap<>();
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) throws IOException, EncodeException {
@@ -48,13 +48,7 @@ public class WebsocketEndpoint{
         broadcast(message);
     }
 
-    @OnError
-    public void onError(Session session, Throwable throwable) {
-        // Do error handling
-        
-    }
-
-    private static void broadcast(Message message) throws  IOException, EncodeException {
+    private static void broadcast(Message message) throws EncodeException {
         chatEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
                 try {
@@ -64,6 +58,12 @@ public class WebsocketEndpoint{
                 }
             }
         });
+    }
+
+    @OnError
+    public void onError(Session session, Throwable throwable) {
+        // Do error handling
+
     }
 
 }
