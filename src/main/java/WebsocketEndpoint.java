@@ -1,8 +1,3 @@
-
-
-
-
-
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -11,7 +6,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-@ServerEndpoint("/chat")
+@ServerEndpoint(value = "/chat", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
 public class WebsocketEndpoint{
 
     private Session session;
