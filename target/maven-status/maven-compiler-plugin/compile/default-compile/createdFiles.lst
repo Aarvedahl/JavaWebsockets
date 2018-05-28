@@ -1,0 +1,4 @@
+MessageEncoder.class
+Message.class
+MessageDecoder.class
+WebsocketEndpoint.class
