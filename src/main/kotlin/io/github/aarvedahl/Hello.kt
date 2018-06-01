@@ -18,13 +18,13 @@ fun Random.nextInt(range: IntRange): Int {
 
 
 
-val trainDestination = setOf<Train>(
+val trainDestination = setOf(
         Train(2, "Stockholm", 200) ,
         Train(3, "Malmö", 200)
 )
 
 val tickets = ArrayList<Ticket>()
-val people = setOf<Person>(
+val people = setOf(
         Person("Alex", ArrayList())
 )
 
@@ -33,10 +33,10 @@ fun buyTicket(name: String, destination: String, trains: Set<Train>) {
     val train = trains.filter { it.destination == destination }
     val timeToDest = random.nextInt(15..42)
     val price = random.nextInt(25..60)
-    if(train.size > 0) {
+    if(train.isNotEmpty()) {
         val ticket = Ticket(tickets.size +1, train.get(0).trainID, timeToDest, price)
         val persons = people.filter { it.name == name }
-        if(persons.size > 0) {
+        if(persons.isNotEmpty()) {
             persons.get(0).tickets.add(ticket)
             println("Person " + persons.get(0).name + " bought a ticket to " + train.get(0).destination)
         }
